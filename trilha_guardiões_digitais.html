@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Trilha Guardiões Digitais - Fase por Fase</title>
+<style>
+body { font-family: Arial, sans-serif; background: #f0f4f8; color: #333; padding: 20px; }
+h1 { text-align: center; color: #0055a5; margin-bottom: 20px; }
+h2 { margin-bottom: 10px; }
+.quiz { display: none; margin-bottom: 30px; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
+button { margin-top: 10px; padding: 10px 15px; border: none; border-radius: 5px; background: #0055a5; color: #fff; cursor: pointer; font-size: 14px; }
+button:hover { background: #003f7f; }
+.correct { color: green; font-weight: bold; }
+.wrong { color: red; font-weight: bold; }
+.drag-item { padding: 8px 12px; margin: 5px; background: #cce5ff; border-radius: 5px; cursor: grab; display: inline-block; }
+.drop-zone { border: 2px dashed #0055a5; padding: 12px; min-width: 140px; margin: 5px; border-radius: 5px; display: inline-block; vertical-align: top; }
+#score-board { text-align: center; display: none; padding: 25px; background: #fff3cd; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+#progress-bar { width: 100%; background: #ddd; border-radius: 10px; overflow: hidden; margin-bottom: 20px; height: 20px; }
+#progress { width: 0%; height: 100%; background: #0055a5; transition: width 0.5s ease; }
+.icon { font-size: 24px; margin-right: 8px; vertical-align: middle; }
+</style>
+</head>
+<body>
+
+<h1>🎮 Trilha Guardiões Digitais</h1>
+<div id="progress-bar"><div id="progress"></div></div>
+
+<div class="quiz multiple-choice" id="q1">
+<h2><span class="icon">🎯</span>1️⃣ Segurança Digital</h2>
+<p>Qual é a senha mais segura?</p>
+<input type="radio" name="q1" value="a"> 123456<br>
+<input type="radio" name="q1" value="b"> MeuNome2025<br>
+<input type="radio" name="q1" value="c"> X@7!gL9#<br>
+<button onclick="checkAnswer('q1','c')">Responder</button>
+<p id="result-q1"></p>
+</div>
+<div class="quiz true-false" id="q2">
+<h2><span class="icon">🎯</span>2️⃣ Privacidade Online</h2>
+<p>É seguro postar seu endereço completo nas redes sociais?</p>
+<button onclick="checkAnswer('q2','a')">Verdadeiro</button>
+<button onclick="checkAnswer('q2','b')">Falso</button>
+<p id="result-q2"></p>
+</div>
+<div class="quiz multiple-choice" id="q3">
+<h2><span class="icon">🎯</span>3️⃣ Combate à Desinformação</h2>
+<p>Antes de compartilhar uma notícia, o que você deve fazer?</p>
+<input type="radio" name="q3" value="a"> Verificar a fonte<br>
+<input type="radio" name="q3" value="b"> Compartilhar rápido<br>
+<input type="radio" name="q3" value="c"> Mandar para todos os grupos<br>
+<button onclick="checkAnswer('q3','a')">Responder</button>
+<p id="result-q3"></p>
+</div>
+<div class="quiz multiple-choice" id="q4">
+<h2><span class="icon">🎯</span>4️⃣ Saúde Mental Digital</h2>
+<p>Qual atitude ajuda a manter a mente saudável?</p>
+<input type="radio" name="q4" value="a"> Jogar sem parar até de madrugada<br>
+<input type="radio" name="q4" value="b"> Fazer pausas regulares longe das telas<br>
+<input type="radio" name="q4" value="c"> Comparar sua vida com a dos outros no Instagram<br>
+<button onclick="checkAnswer('q4','b')">Responder</button>
+<p id="result-q4"></p>
+</div>
+<div class="quiz true-false" id="q5">
+<h2><span class="icon">🎯</span>5️⃣ Ética e Respeito</h2>
+<p>Ofender colegas em grupos de mensagens é cyberbullying.</p>
+<button onclick="checkAnswer('q5','a')">Verdadeiro</button>
+<button onclick="checkAnswer('q5','b')">Falso</button>
+<p id="result-q5"></p>
+</div>
+<div class="quiz multiple-choice" id="q6">
+<h2><span class="icon">🎯</span>6️⃣ Cidadania Digital</h2>
+<p>O que significa ser um bom cidadão digital?</p>
+<input type="radio" name="q6" value="a"> Usar internet só para diversão<br>
+<input type="radio" name="q6" value="b"> Denunciar conteúdos nocivos<br>
+<input type="radio" name="q6" value="c"> Baixar aplicativos piratas<br>
+<button onclick="checkAnswer('q6','b')">Responder</button>
+<p id="result-q6"></p>
+</div>
+<div class="quiz drag-drop" id="q7">
+<h2><span class="icon">🎯</span>7️⃣ Proteção de Dados</h2>
+<p>Arraste para a coluna correta:</p>
+<div>
+<div class="drag-item" draggable="true" id="Nome_completo">Nome completo</div>
+<div class="drag-item" draggable="true" id="RG">RG</div>
+<div class="drag-item" draggable="true" id="Idade">Idade</div>
+</div>
+<div style="margin-top:10px;">
+<div class="drop-zone" id="pessoal">Pessoal</div>
+<div class="drop-zone" id="sensivel">Sensível</div>
+</div>
+<button onclick="checkDrag()">Responder</button>
+<p id="result-q7"></p>
+</div>
+<div class="quiz multiple-choice" id="q8">
+<h2><span class="icon">🎯</span>8️⃣ Tempo de Uso Consciente</h2>
+<p>Se você passa 6 horas por dia em jogos online, o que deveria fazer?</p>
+<input type="radio" name="q8" value="a"> Nada, isso é normal<br>
+<input type="radio" name="q8" value="b"> Reduzir o tempo e equilibrar com estudos/lazer offline<br>
+<input type="radio" name="q8" value="c"> Jogar mais ainda<br>
+<button onclick="checkAnswer('q8','b')">Responder</button>
+<p id="result-q8"></p>
+</div>
+<div class="quiz true-false" id="q9">
+<h2><span class="icon">🎯</span>9️⃣ Colaboração e Aprendizagem</h2>
+<p>Aprender em grupo online pode ajudar a entender melhor os conteúdos.</p>
+<button onclick="checkAnswer('q9','a')">Verdadeiro</button>
+<button onclick="checkAnswer('q9','b')">Falso</button>
+<p id="result-q9"></p>
+</div>
+
+<div id="score-board">
+  <h2>🏆 Parabéns!</h2>
+  <p id="score-message"></p>
+</div>
+
+<script>
+let current = 1;
+let total = 9;
+let score = 0;
+
+function showCurrent() {
+  for(let i=1;i<=total;i++){
+    document.getElementById('q'+i).style.display = (i===current)?'block':'none';
+  }
+  document.getElementById('progress').style.width = ((current-1)/total*100)+'%';
+}
+showCurrent();
+
+// Drag & Drop
+let dragItems = document.querySelectorAll('.drag-item');
+let dropZones = document.querySelectorAll('.drop-zone');
+dragItems.forEach(item=>{item.addEventListener('dragstart',e=>{e.dataTransfer.setData('text',e.target.id);});});
+dropZones.forEach(zone=>{zone.addEventListener('dragover',e=>e.preventDefault()); zone.addEventListener('drop',e=>{ let id=e.dataTransfer.getData('text'); e.target.appendChild(document.getElementById(id)); });});
+
+function checkAnswer(qid, correct){
+  let result=document.getElementById('result-'+qid);
+  let radios=document.getElementsByName(qid);
+  let selected='';
+  if(radios.length>0){ for(let r of radios){ if(r.checked){ selected=r.value; } } } else { selected=correct; }
+  if(selected===correct){
+    result.innerHTML='✅ Correto!';
+    result.className='correct';
+    score++;
+    current++;
+    if(current>total){ showScore(); return; }
+    setTimeout(showCurrent,500);
+  } else { result.innerHTML='❌ Tente novamente!'; result.className='wrong'; }
+}
+
+function checkDrag(){
+  let result=document.getElementById('result-q7');
+  let correto = document.getElementById('pessoal').contains(document.getElementById('Nome_completo')) &&
+                document.getElementById('pessoal').contains(document.getElementById('Idade')) &&
+                document.getElementById('sensivel').contains(document.getElementById('RG'));
+  if(correto){ result.innerHTML='✅ Correto!'; result.className='correct'; score++; current++; if(current>total){ showScore(); return; } setTimeout(showCurrent,500);}
+  else{ result.innerHTML='❌ Tente novamente!'; result.className='wrong'; }
+}
+
+function showScore(){
+  document.getElementById('score-board').style.display='block';
+  document.getElementById('score-message').innerText = `Você completou todas as fases e acertou ${score} de ${total}! 🎉`;
+  document.getElementById('progress').style.width='100%';
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+</script>
+
+</body>
+</html>
